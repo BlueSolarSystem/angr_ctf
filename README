@@ -1,6 +1,14 @@
-Eventually, this README will have information about building, installing, and 
-playing the levels.
+Follow these step you will get my program situations.
 
-Currently, if you want to play around with them, take a look at package.py,
-which builds the levels, and dist/ which generally has an up-to-date build
-of each of the levels.
+1. git clone {$my_brach} (i'm new guy using git , i not sure 233)
+2.python3 pip install -r requirements.txt
+3.wait for finish.
+4.python3 package.py "./execise1"
+
+
+
+tips: There are some erro in package templite , 
+	like: 
+		1."xrange"  ->  "range"
+		2."exec xx1 in xxx2(namespace)"   ->  "exec (xx1,xx2)" 
+

@@ -5,7 +5,7 @@ from templite import Templite
 
 def generate(argv):
   if len(argv) != 3:
-    print 'Usage: pypy generate.py [seed] [output_file]'
+    print ('Usage: pypy generate.py [seed] [output_file]')
     sys.exit()
 
   seed = argv[1]
@@ -15,8 +15,8 @@ def generate(argv):
 
   description = ''
   with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'description.txt'), 'r') as desc_file:
-    description = desc_file.read().encode('string_escape').replace('\"', '\\\"')
-
+    #description = desc_file.read().encode('string_escape').replace(b'\"', b'\\\"')
+    description = desc_file.read().replace('\"', '\\\"')
   padding0 = random.randint(0, 2**26)
   padding1 = random.randint(0, 2**26)
 
@@ -24,7 +24,7 @@ def generate(argv):
   c_code = Templite(template).render(description=description, padding0=padding0, padding1=padding1)
 
   with tempfile.NamedTemporaryFile(delete=False, suffix='.c') as temp:
-    temp.write(c_code)
+    temp.write(bytes(c_code.encode("utf-8")))
     temp.seek(0)
     os.system('gcc -m32 -o ' + output_file + ' ' + temp.name)
 
